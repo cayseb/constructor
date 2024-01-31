@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('system_name');
             $table->string('name');
             $table->string('type');
-            $table->boolean('required')->default(false);
-            $table->string('label')->nullable();
-            $table->string('placeholder')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
         });

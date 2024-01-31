@@ -25,4 +25,9 @@ class Field extends Model implements Sortable
     {
         return $this->hasOne(Checkbox::class);
     }
+
+    public function input(): HasOne
+    {
+        return $this->hasOne(Input::class);
+    }
 }

@@ -21,4 +21,5 @@ class Input extends Model
     {
         return $this->morphMany(Option::class, 'optionable');
     }
+
 }

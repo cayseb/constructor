@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('inputs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('type');
+            $table->string('label')->nullable();
+            $table->string('placeholder')->nullable();
+            $table->boolean('required')->default(false);
             $table->foreignUuid('field_id')
                 ->references('id')
                 ->on('fields')

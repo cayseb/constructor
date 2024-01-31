@@ -12,6 +12,7 @@ class Option extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $fillable = ['name'];
 
     public function optionable(): MorphTo
     {
