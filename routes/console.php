@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+
+Artisan::command('asd', function () {
+        dd(\App\Models\Form::with('steps.inputs','steps.selects.options','steps.checkboxes.options','steps.radios.options')->get());
+});

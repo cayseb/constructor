@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('steps', function (Blueprint $table) {
+        Schema::create('stepables', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->foreignUuid('step_id')
+                ->references('id')
+                ->on('steps')
+            ->cascadeOnDelete();
+            $table->uuid('stepable_id');
+            $table->string('stepable_type');
             $table->integer('order')->default(0);
             $table->timestamps();
         });
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('steps');
+        Schema::dropIfExists('stepables');
     }
 };

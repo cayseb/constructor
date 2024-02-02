@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Admin\Controllers\Fields;
 
-use App\Enums\FieldEnum;
-use App\Enums\InputTypeEnum;
 use App\Models\Checkbox;
-use App\Models\Field;
-use App\Models\Input;
+use Carbon\Carbon;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -19,15 +16,17 @@ class CheckboxController extends AdminController
     public function index(Content $content): Content
     {
         return $content
-            ->title('Чекбокс')
+            ->title('Чекбоксы')
             ->body($this->grid());
     }
 
     protected function grid(): Grid
     {
         $grid = new Grid(new \App\Models\Checkbox());
-        $grid->model()->where('field_id', request()->field);
         $grid->column('system_name','Название');
+        $grid->column('created_at', 'Дата создания')->display(function ($date) {
+            return Carbon::parse($date)->format('d-m-Y');
+        });
         $grid->disableCreateButton(false);
         return $grid;
     }
@@ -39,7 +38,6 @@ class CheckboxController extends AdminController
         $form->text('name', 'Название');
         $form->number('required_options', 'Обязательно параметров')
             ->default(1);
-        $form->hidden('field_id')->value(request()->field);
         $form->hasMany('options', 'Варианты',function (Form\NestedForm $form) {
             $form->text('name', 'Опция');
         });
@@ -54,9 +52,9 @@ class CheckboxController extends AdminController
 
     public function edit($id, Content $content): Content
     {
-        $checkbox = Checkbox::findOrFail(request()->checkbox);
+        $checkbox = Checkbox::findOrFail($id);
 
-        return $content->body($this->form()->edit(request()->checkbox));
+        return $content->body($this->form()->edit($id));
     }
 }
 

@@ -9,6 +9,7 @@ enum InputTypeEnum: string
     case DATE_TIME = 'date_time';
     case NUMBER = 'number';
     case TEXT = 'text';
+    case TEL = 'tel';
 
 
     /**

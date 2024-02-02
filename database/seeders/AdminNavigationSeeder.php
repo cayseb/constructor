@@ -23,18 +23,52 @@ class AdminNavigationSeeder extends Seeder
 //        ],
         [
             "parent_id" => 0,
+            "order" => 1,
+            "title" => "Поля",
+            "icon" => "fa-th-list",
+            "uri" => null,
+            "permission" => null,
+            "child" => [
+                [
+                    "parent_id" => 0,
+                    "order" => 1,
+                    "title" => "Инпуты",
+                    "icon" => "fa-comments",
+                    "uri" => "/inputs",
+                    "permission" => null
+                ],
+                [
+                    "parent_id" => 0,
+                    "order" => 1,
+                    "title" => "Радио",
+                    "icon" => "fa-comments",
+                    "uri" => "/radio",
+                    "permission" => null
+                ],
+                [
+                    "parent_id" => 0,
+                    "order" => 1,
+                    "title" => "Селекты",
+                    "icon" => "fa-comments",
+                    "uri" => "/selects",
+                    "permission" => null
+                ],
+                [
+                    "parent_id" => 0,
+                    "order" => 1,
+                    "title" => "Чекбоксы",
+                    "icon" => "fa-comments",
+                    "uri" => "/checkboxes",
+                    "permission" => null
+                ],
+            ],
+        ],
+        [
+            "parent_id" => 0,
             "order" => 0,
             "title" => "Формы",
             "icon" => "fa-comments",
             "uri" => "/forms",
-            "permission" => null
-        ],
-        [
-            "parent_id" => 0,
-            "order" => 1,
-            "title" => "Поля",
-            "icon" => "fa-comments",
-            "uri" => "/fields",
             "permission" => null
         ],
         [

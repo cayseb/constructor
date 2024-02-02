@@ -14,13 +14,20 @@ class Checkbox extends Model
 
     protected $fillable = ['name'];
 
-    public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    protected $guarded = [];
+
+    public function steps()
     {
-        return $this->belongsTo(Field::class);
+        return $this->morphToMany(Step::class, 'stepable');
     }
 
     public function options(): MorphMany
     {
         return $this->morphMany(Option::class, 'optionable');
+    }
+
+    public function stepables()
+    {
+        return $this->belongsTo(Stepable::class, 'stepable_id');
     }
 }

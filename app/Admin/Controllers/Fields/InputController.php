@@ -8,6 +8,7 @@ use App\Enums\FieldEnum;
 use App\Enums\InputTypeEnum;
 use App\Models\Field;
 use App\Models\Input;
+use Carbon\Carbon;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -25,16 +26,10 @@ class InputController extends AdminController
     protected function grid(): Grid
     {
         $grid = new Grid(new \App\Models\Input());
-
-//        $grid->column('type', 'Тип поля')->display(function () {
-//            $nameField = FieldEnum::getName(FieldEnum::from($this->type));
-//            return "<a href=" . route('admin.inputs.index') . ">$nameField</a>";
-//        });
-//        $grid->column('type','Тип поля')
-//        ->display(fn ():string => FieldEnum::getName(FieldEnum::from($this->type)));
-//        $grid->column('created_at', 'Дата создания')->display(function ($date) {
-//            return Carbon::parse($date)->format('d-m-Y');
-//        });
+        $grid->column('system_name','Название');
+        $grid->column('created_at', 'Дата создания')->display(function ($date) {
+            return Carbon::parse($date)->format('d-m-Y');
+        });
         $grid->disableCreateButton(false);
         return $grid;
     }

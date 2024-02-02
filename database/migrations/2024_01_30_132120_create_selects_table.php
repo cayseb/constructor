@@ -16,10 +16,6 @@ return new class extends Migration
             $table->string('system_name');
             $table->string('name');
             $table->boolean('multi')->default(false);
-            $table->foreignUuid('field_id')
-                ->references('id')
-                ->on('fields')
-                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -15,10 +15,6 @@ return new class extends Migration {
             $table->string('system_name');
             $table->string('name');
             $table->integer('required_options')->nullable();
-            $table->foreignUuid('field_id')
-                ->references('id')
-                ->on('fields')
-                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

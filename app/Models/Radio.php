@@ -12,10 +12,7 @@ class Radio extends Model
     use HasFactory;
     use HasUuids;
 
-    public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class);
-    }
+    protected $guarded = [];
 
     public function options(): MorphMany
     {

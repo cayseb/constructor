@@ -16,9 +16,11 @@ Route::group([
     $router->resource('fields', \App\Admin\Controllers\FieldController::class);
     $router->resource('forms', \App\Admin\Controllers\FormController::class);
     $router->resource('steps', \App\Admin\Controllers\StepController::class);
-    $router->resource('fields/{field}/inputs', \App\Admin\Controllers\Fields\InputController::class);
-    $router->resource('fields/{field}/radio', \App\Admin\Controllers\Fields\RadioController::class);
-    $router->resource('fields/{field}/selects', \App\Admin\Controllers\Fields\SelectController::class);
-    $router->resource('fields/{field}/checkboxes', \App\Admin\Controllers\Fields\CheckboxController::class);
+    $router->resource('steps/{step}/steable', \App\Admin\Controllers\StepableController::class);
+    $router->resource('form/{form}/steps', \App\Admin\Controllers\FormStepController::class,['as' => 'form']);
+    $router->resource('inputs', \App\Admin\Controllers\Fields\InputController::class);
+    $router->resource('radio', \App\Admin\Controllers\Fields\RadioController::class);
+    $router->resource('selects', \App\Admin\Controllers\Fields\SelectController::class);
+    $router->resource('checkboxes', \App\Admin\Controllers\Fields\CheckboxController::class);
 
 });
