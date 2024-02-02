@@ -40,12 +40,18 @@ class InputController extends AdminController
         $form->text('system_name','Системное название');
         $form->text('name','Название');
         $form->select('type','Тип поля')->options([
+            InputTypeEnum::CHECKBOX->value => 'Чекбокс',
             InputTypeEnum::DATE->value => 'Дата',
-            InputTypeEnum::DATE_TIME->value => 'Дата-время',
+            InputTypeEnum::DATETIME_LOCAL->value => 'Дата-время',
+            InputTypeEnum::EMAIL->value => 'email',
             InputTypeEnum::NUMBER->value => 'Число',
+            InputTypeEnum::RADIO->value => 'Радио',
+            InputTypeEnum::TEL->value => 'Телефон',
             InputTypeEnum::TEXT->value => 'Текст',
-        ]);
-
+        ])->when(InputTypeEnum::CHECKBOX->value,function (Form $form){
+            $form->text('label','Лейбл');
+            $form->text('label','Лейбл');
+        });
         $form->text('label','Лейбл');
         $form->text('placeholder','Плейсхолдер');
         $form->switch('required','Обязательно');

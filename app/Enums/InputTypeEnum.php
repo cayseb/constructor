@@ -5,11 +5,14 @@ namespace App\Enums;
 
 enum InputTypeEnum: string
 {
+    case CHECKBOX = 'checkbox';
     case DATE = 'date';
-    case DATE_TIME = 'date_time';
+    case DATETIME_LOCAL = 'datetime-local';
+    case EMAIL = 'email';
     case NUMBER = 'number';
-    case TEXT = 'text';
+    case RADIO = 'radio';
     case TEL = 'tel';
+    case TEXT = 'text';
 
 
     /**
