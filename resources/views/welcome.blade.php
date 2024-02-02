@@ -8,24 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-<fieldset>
-    <legend>Select a maintenance drone:</legend>
+<form action="">
 
-    <div>
-        <input type="radio" id="huey" name="drone" value="huey" />
-        <label for="huey">Huey</label>
-    </div>
+    @foreach($form->steps as $step)
+        <div>
+            {{$step->name}}
+        </div>
+        @foreach($step as $item)
+        {{dd($step)}}
+        @endforeach
 
-    <div>
-        <input type="radio" id="dewey" name="drone" value="dewey" />
-        <label for="dewey">Dewey</label>
-    </div>
+    @endforeach
 
-    <div>
-        <input type="radio" id="louie" name="drone" value="louie" />
-        <label for="louie">Louie</label>
-    </div>
-</fieldset>
-
+</form>
 </body>
 </html>

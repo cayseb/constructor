@@ -6,10 +6,11 @@ namespace App\Enums;
 enum InputTypeEnum: string
 {
     case DATE = 'date';
-    case DATE_TIME = 'date_time';
+    case DATETIME_LOCAL = 'datetime-local';
     case NUMBER = 'number';
     case TEXT = 'text';
     case TEL = 'tel';
+    case EMAIL = 'email';
 
 
     /**

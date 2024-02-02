@@ -41,9 +41,11 @@ class InputController extends AdminController
         $form->text('name','Название');
         $form->select('type','Тип поля')->options([
             InputTypeEnum::DATE->value => 'Дата',
-            InputTypeEnum::DATE_TIME->value => 'Дата-время',
+            InputTypeEnum::DATETIME_LOCAL->value => 'Дата-время',
             InputTypeEnum::NUMBER->value => 'Число',
             InputTypeEnum::TEXT->value => 'Текст',
+            InputTypeEnum::TEL->value => 'Телефон',
+            InputTypeEnum::EMAIL->value => 'email',
         ]);
 
         $form->text('label','Лейбл');
