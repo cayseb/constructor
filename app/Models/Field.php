@@ -21,13 +21,33 @@ class Field extends Model implements Sortable
         'sort_when_creating' => true,
     ];
 
-    public function checkboxes(): HasOne
+    public function checkbox(): HasOne
     {
         return $this->hasOne(Checkbox::class);
+    }
+
+    public function radio(): HasOne
+    {
+        return $this->hasOne(Radio::class);
+    }
+
+    public function select(): HasOne
+    {
+        return $this->hasOne(Select::class);
     }
 
     public function input(): HasOne
     {
         return $this->hasOne(Input::class);
+    }
+
+    public function getModel()
+    {
+        return match ($this->type){
+            Input::class => Input::findOrFail($this->stepable_id),
+            Select::class => Select::findOrFail($this->stepable_id),
+            Checkbox::class => Checkbox::findOrFail($this->stepable_id),
+            Radio::class => Radio::findOrFail($this->stepable_id),
+        };
     }
 }

@@ -20,5 +20,5 @@ Route::group([
     $router->resource('fields/{field}/radio', \App\Admin\Controllers\Fields\RadioController::class);
     $router->resource('fields/{field}/selects', \App\Admin\Controllers\Fields\SelectController::class);
     $router->resource('fields/{field}/checkboxes', \App\Admin\Controllers\Fields\CheckboxController::class);
-
+    $router->get('fields/{field}/checkbox', [\App\Admin\Controllers\CheckboxController::class, 'index'])->name('checkbox.form');
 });

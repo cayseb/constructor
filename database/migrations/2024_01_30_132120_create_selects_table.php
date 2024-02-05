@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('selects', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('system_name');
             $table->string('name');
             $table->boolean('multi')->default(false);
             $table->foreignUuid('field_id')

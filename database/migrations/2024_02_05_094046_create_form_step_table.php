@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('form_step', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('type');
+            $table->foreignUuid('form_id')
+                ->references('id')
+                ->on('forms')
+                ->cascadeOnDelete();
+            $table->foreignUuid('step_id')
+                ->references('id')
+                ->on('steps')
+                ->cascadeOnDelete();
             $table->integer('order')->default(0);
             $table->timestamps();
         });
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('form_step');
     }
 };

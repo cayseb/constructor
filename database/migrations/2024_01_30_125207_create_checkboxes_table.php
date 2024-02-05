@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('checkboxes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('system_name');
             $table->string('name');
             $table->integer('required_options')->nullable();
             $table->foreignUuid('field_id')

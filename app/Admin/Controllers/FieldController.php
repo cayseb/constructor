@@ -30,6 +30,7 @@ class FieldController extends AdminController
     {
         $grid = new Grid(new \App\Models\Field());
         $grid->column('name', 'Название поля')->display(function () {
+
             $route = match (FieldEnum::from($this->type)) {
                 FieldEnum::INPUT => route('admin.inputs.index', ['field' => $this->id]),
                 FieldEnum::CHECKBOX => route('admin.checkboxes.index', ['field' => $this->id]),
@@ -50,40 +51,46 @@ class FieldController extends AdminController
     protected function form(): Form
     {
         $form = new Form(new Field());
-        $form->text('system_name', 'Системное название');
         $form->text('name', 'Название');
-        $form->select('type', 'Тип поля')
+        $form->radio('type', 'Кнопка')
             ->options([
                 FieldEnum::INPUT->value => 'инпут',
                 FieldEnum::CHECKBOX->value => 'чекбокс',
                 FieldEnum::RADIO->value => 'радио',
                 FieldEnum::SELECT->value => 'селект'
-            ]);
-//        $form->radioButton('type', 'Кнопка')
-//            ->options([
-//                FieldEnum::INPUT->value => 'инпут',
-//                FieldEnum::CHECKBOX->value => 'чекбокс',
-//                FieldEnum::RADIO->value => 'радио',
-//                FieldEnum::SELECT->value => 'селект'
-//            ])
-//            ->when(FieldEnum::INPUT->value, function (Form $form) {
-//                $form->select('input.type', 'Тип инпута')
-//                    ->options([
-//                        InputTypeEnum::DATE->value => 'дата',
-//                        InputTypeEnum::DATE_TIME->value => 'дата-время',
-//                        InputTypeEnum::NUMBER->value => 'число',
-//                        InputTypeEnum::TEXT->value => 'текст',
-//                    ]);
-//                $form->text('input.name', 'Название');
-//                $form->text('input.label', 'label');
-//                $form->text('input.placeholder', 'placeholder');
-//                $form->switch('input.required', 'required');
-////                $form->morphMany('checkboxes.options', function (Form\NestedForm $form) {
-////                    $form->text('name');
-////                });
-//            })->when(false, function () {
-//            });
+            ])
+            ->when(FieldEnum::INPUT->value, function (Form $form) {
+                $form->select('input.type', 'Тип инпута')
+                    ->options([
+                        InputTypeEnum::DATE->value => 'дата',
+                        InputTypeEnum::DATE_TIME->value => 'дата-время',
+                        InputTypeEnum::NUMBER->value => 'число',
+                        InputTypeEnum::TEXT->value => 'текст',
+                    ]);
+                $form->text('input.name', 'Название');
+                $form->text('input.label', 'Лейбл');
+                $form->text('input.placeholder', 'Плейсхолдер');
+                $form->switch('input.required', 'Обязательно');
+            })
+            ->when(FieldEnum::CHECKBOX->value, function (Form $form) {
+            })
+            ->when(FieldEnum::RADIO->value, function (Form $form) {
+                $form->text('radio.name', 'Название');
+            })
+            ->when(FieldEnum::SELECT->value, function (Form $form) {
+                $form->text('select.name', 'Название');
+                $form->switch('select.multi', 'Мультиселект');
+            });
+        $form->saved(function (Form $form) {
+            $route = match (FieldEnum::from($form->model()->type)) {
+                FieldEnum::INPUT => route('admin.inputs.index', ['field' => $form->model()->id]),
+                FieldEnum::CHECKBOX => route('admin.checkbox.form', ['field' => $form->model()->id]),
+                FieldEnum::SELECT => route('admin.selects.index', ['field' => $form->model()->id]),
+                FieldEnum::RADIO => route('admin.radio.index', ['field' => $form->model()->id]),
+            };
+            return redirect($route);
 
+        });
         return $form;
     }
 

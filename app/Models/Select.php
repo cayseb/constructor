@@ -17,7 +17,6 @@ class Select extends Model
         return $this->belongsTo(Field::class);
     }
 
-
     public function options(): MorphMany
     {
         return $this->morphMany(Option::class, 'optionable');
