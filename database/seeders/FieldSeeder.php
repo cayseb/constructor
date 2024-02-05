@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\InputTypeEnum;
 use App\Models\Checkbox;
+use App\Models\Form;
 use App\Models\Input;
 use App\Models\Radio;
 use App\Models\Select;
@@ -17,6 +18,12 @@ class FieldSeeder extends Seeder
      */
     public function run(): void
     {
+
+        Radio::destroy(Radio::all()->pluck('id'));
+        Checkbox::destroy(Checkbox::all()->pluck('id'));
+        Input::destroy(Input::all()->pluck('id'));
+        Select::destroy(Select::all()->pluck('id'));
+        Form::destroy(Form::all()->pluck('id'));
 
         $radio = Radio::create([
             'system_name'=>'Гендер',

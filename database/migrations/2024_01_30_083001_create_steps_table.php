@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('steps', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

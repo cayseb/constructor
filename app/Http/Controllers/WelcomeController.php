@@ -14,7 +14,8 @@ class WelcomeController
             'steps.inputs',
             'steps.selects.options',
             'steps.checkboxes.options',
-            'steps.radios.options'
+            'steps.radios.options',
+            'steps.stepables'
         )->first();
         return view('welcome',compact('form'));
     }

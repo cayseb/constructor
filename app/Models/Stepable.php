@@ -28,7 +28,7 @@ class Stepable extends MorphPivot implements Sortable
 
     public function step()
     {
-        return $this->belongsTo(Step::class, 'step_id');
+        return $this->hasMany(Step::class, 'step_id');
     }
 
     public function stepables()

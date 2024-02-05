@@ -20,5 +20,6 @@ Artisan::command('inspire', function () {
 
 
 Artisan::command('asd', function () {
-        dd(\App\Models\Form::with('steps.inputs','steps.selects.options','steps.checkboxes.options','steps.radios.options')->get());
+        $step = \App\Models\Step::first();
+        dd($step->stepables);
 });

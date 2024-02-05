@@ -32,7 +32,6 @@ class StepController extends AdminController
     protected function grid(): Grid
     {
         $grid = new Grid(new \App\Models\Step());
-        $grid->sortable();
         $grid->column('name','Название')->display(function (){
             return "<a href=" . route('admin.steable.index', ['step' => $this->id]) . ">$this->name</a>";
         });
