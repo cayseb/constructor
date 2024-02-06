@@ -23,65 +23,68 @@ class FieldSeeder extends Seeder
         Field::destroy(Field::all()->pluck('id'));
 
         $radio = Radio::create([
-            'system_name'=>'Гендер',
-            'name'=>'Гендер'
+            'system_name' => 'Гендер',
+            'name' => 'Гендер'
         ]);
 
-        $radio->options()->create(['name'=>'М']);
-        $radio->options()->create(['name'=>'Ж']);
-
-        $select = Select::create([
-            'system_name' =>'Какой браузер вы используете',
-            'name' =>'Какой браузер вы используете',
-            'multi' =>true,
-        ]);
-        $select->options()->create(['name'=>'Хром']);
-        $select->options()->create(['name'=>'Мозила']);
-        $select->options()->create(['name'=>'Яндекс']);
+        $radio->options()->create(['name' => 'М', 'checked' => true]);
+        $radio->options()->create(['name' => 'Ж']);
+        $radio->options()->create(['name' => 'Собака']);
 
         $select = Select::create([
-            'system_name' =>'Выберите вариант ответа',
-            'name' =>'Выберите вариант ответа',
-            'multi' =>false,
+            'system_name' => 'Какой браузер вы используете',
+            'name' => 'Какой браузер вы используете',
+            'multi' => true,
         ]);
-        $select->options()->create(['name'=>'Вариант А']);
-        $select->options()->create(['name'=>'Вариант Б']);
-        $select->options()->create(['name'=>'Вариант С']);
+        $select->options()->create(['name' => 'Выберите браузер', 'default' => true]);
+        $select->options()->create(['name' => 'Хром', 'selected' => true]);
+        $select->options()->create(['name' => 'Мозила']);
+        $select->options()->create(['name' => 'Яндекс']);
+
+        $select = Select::create([
+            'system_name' => 'Выберите вариант ответа',
+            'name' => 'Выберите вариант ответа',
+            'multi' => false,
+        ]);
+        $select->options()->create(['name' => 'Выберите вариант ответа', 'default' => true]);
+        $select->options()->create(['name' => 'Вариант А']);
+        $select->options()->create(['name' => 'Вариант Б']);
+        $select->options()->create(['name' => 'Вариант С']);
 
         $checkbox = Checkbox::create([
-                'system_name'=>'Сколько событий вы посетили',
-                'name'=>'Сколько событий вы посетили',
-                'required_options'=>'1',
+            'system_name' => 'Сколько событий вы посетили',
+            'name' => 'Сколько событий вы посетили',
+            'required_options' => '1',
         ]);
 
-        $checkbox->options()->create(['name'=>'Одно']);
-        $checkbox->options()->create(['name'=>'Два']);
-        $checkbox->options()->create(['name'=>'Три']);
+        $checkbox->options()->create(['name' => 'Одно']);
+        $checkbox->options()->create(['name' => 'Два','checked'=>true]);
+        $checkbox->options()->create(['name' => 'Три']);
 
 
         Input::create([
-            'system_name'=> 'ФИО',
-            'name'=> 'ФИО',
-            'type'=> InputTypeEnum::TEXT->value,
-            'label'=> 'ФИО',
-            'placeholder'=> 'ФИО',
-            'required'=> true,
+            'system_name' => 'ФИО',
+            'name' => 'ФИО',
+            'type' => InputTypeEnum::TEXT->value,
+            'label' => 'ФИО',
+            'placeholder' => 'ФИО',
+            'required' => true,
         ]);
         Input::create([
-            'system_name'=> 'Номер телефона',
-            'name'=> 'Номер телефона',
-            'type'=> InputTypeEnum::TEXT->value,
-            'label'=> 'Номер телефона',
-            'placeholder'=> 'Номер телефона',
-            'required'=> true,
+            'system_name' => 'Номер телефона',
+            'name' => 'Номер телефона',
+            'type' => InputTypeEnum::TEXT->value,
+            'label' => 'Номер телефона',
+            'placeholder' => 'Номер телефона',
+            'required' => true,
         ]);
         Input::create([
-            'system_name'=> 'email',
-            'name'=> 'email',
-            'type'=> InputTypeEnum::TEXT->value,
-            'label'=> 'email',
-            'placeholder'=> 'email',
-            'required'=> true,
+            'system_name' => 'email',
+            'name' => 'email',
+            'type' => InputTypeEnum::TEXT->value,
+            'label' => 'email',
+            'placeholder' => 'email',
+            'required' => true,
         ]);
 
     }

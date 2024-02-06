@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\FieldOptions;
 
 use App\Models\Step;
 use Carbon\Carbon;
@@ -10,8 +10,9 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use function App\Admin\Controllers\route;
 
-class FormController extends AdminController
+class RadioOptionController extends AdminController
 {
     public function index(Content $content): Content
     {
@@ -28,7 +29,7 @@ class FormController extends AdminController
     {
         $grid = new Grid(new \App\Models\Form());
         $grid->column('name','Название')->display(function (){
-            return "<a href=" . route('admin.form.step.index', ['form' => $this->id]) . ">$this->name</a>";
+            return "<a href=" . route('admin.form.steps.index', ['form' => $this->id]) . ">$this->name</a>";
         });
         $grid->column('created_at', 'Дата создания')->display(function ($date) {
             return Carbon::parse($date)->format('d-m-Y');

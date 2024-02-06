@@ -20,7 +20,7 @@ class RadioController extends AdminController
             ->breadcrumb(
                 [
                     'text' => 'Радио',
-                    'url' => route('admin.radio.index')
+                    'url' => route('admin.radios.index')
                 ])->body($this->grid());
     }
 
@@ -42,6 +42,7 @@ class RadioController extends AdminController
         $form->text('name','Название');
         $form->hasMany('options', 'Варианты',function (Form\NestedForm $form) {
             $form->text('name', 'Опция');
+            $form->switch('checked', 'Выбрано по умолчанию');
         });
         return $form;
     }
@@ -49,7 +50,7 @@ class RadioController extends AdminController
     public function create(Content $content): Content
     {
         $content->breadcrumb(
-            ['text' => 'Радио', 'url' => route('admin.radio.index')],
+            ['text' => 'Радио', 'url' => route('admin.radios.index')],
             ['text' => 'Создание', 'url' => '/']
         );
         return $content->body($this->form());
@@ -59,7 +60,7 @@ class RadioController extends AdminController
     {
         $radio = Radio::findOrFail($id);
         $content->breadcrumb(
-            ['text' => 'Радио', 'url' => route('admin.radio.index')],
+            ['text' => 'Радио', 'url' => route('admin.radios.index')],
             ['text' => $radio->system_name, 'url' => '/']
         );
         return $content->body($this->form()->edit($id));

@@ -42,7 +42,7 @@ class AdminNavigationSeeder extends Seeder
                     "order" => 1,
                     "title" => "Радио",
                     "icon" => "fa-comments",
-                    "uri" => "/radio",
+                    "uri" => "/radios",
                     "permission" => null
                 ],
                 [

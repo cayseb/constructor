@@ -40,6 +40,7 @@ class CheckboxController extends AdminController
             ->default(1);
         $form->hasMany('options', 'Варианты',function (Form\NestedForm $form) {
             $form->text('name', 'Опция');
+            $form->switch('checked', 'Выбрано по умолчанию');
         });
         return $form;
     }

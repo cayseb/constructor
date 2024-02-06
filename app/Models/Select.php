@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Select extends Model
 {
@@ -14,12 +14,12 @@ class Select extends Model
 
     protected $guarded = [];
 
-    public function options(): MorphMany
+    public function options()
     {
-        return $this->morphMany(Option::class, 'optionable');
+        return $this->hasMany(SelectOption::class);
     }
 
-    public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function field(): BelongsTo
     {
         return $this->belongsTo(Field::class);
     }

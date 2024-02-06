@@ -38,7 +38,7 @@ class RadioObserver
      */
     public function deleted(Radio $radio): void
     {
-        //
+        $radio->field->delete();
     }
 
     /**

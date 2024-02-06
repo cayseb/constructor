@@ -40,7 +40,7 @@ class CheckboxObserver
      */
     public function deleted(Checkbox $checkbox): void
     {
-        //
+        $checkbox->field->delete();
     }
 
     /**

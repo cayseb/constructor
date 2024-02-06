@@ -18,8 +18,9 @@ class FieldStepController extends AdminController
 {
     public function index(Content $content): Content
     {
+        $step = Step::findOrFail(request()->step);
         return $content
-            ->title('Шаги')
+            ->title($step->name)
             ->breadcrumb(
                 [
                     'text' => 'Шаги',
@@ -29,7 +30,7 @@ class FieldStepController extends AdminController
 
     protected function grid(): Grid
     {
-        $grid = new Grid(new \App\Models\Stepable());
+        $grid = new Grid(new \App\Models\FieldStep());
         $grid->sortable();
         $grid->actions(function ($action) {
             $action->disableEdit();
@@ -37,8 +38,11 @@ class FieldStepController extends AdminController
             $action->disableDelete();
         });
         $grid->model()->where('step_id',request()->step);
-        $grid->column('stepable_id','Название')->display(function (){
-            return $this->getModel()->system_name;
+        $grid->column('field_id','Название')->display(function (){
+            return $this->getModel()->fields->name;
+        });
+        $grid->column('type','Тип поля')->display(function (){
+            return $this->getModel()->fields->type;
         });
         $grid->column('created_at', 'Дата создания')->display(function ($date) {
             return Carbon::parse($date)->format('d-m-Y');

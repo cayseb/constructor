@@ -34,7 +34,7 @@ class StepController extends AdminController
     {
         $grid = new Grid(new \App\Models\Step());
         $grid->column('name','Название')->display(function (){
-            return "<a href=" . route('admin.steable.index', ['step' => $this->id]) . ">$this->name</a>";
+            return "<a href=" . route('admin.step.fields.index', ['step' => $this->id]) . ">$this->name</a>";
         });
         $grid->column('created_at', 'Дата создания')->display(function ($date) {
             return Carbon::parse($date)->format('d-m-Y');
@@ -46,7 +46,7 @@ class StepController extends AdminController
     protected function form(): Form
     {
         $form = new Form(new Step());
-        $form->text('name','Название');
+        $form->text('name','Название')->required();
         $form->multipleSelect('fields','Инпуты')
             ->options(Field::whereType(FieldEnum::INPUT->value)->pluck('name','id')->toArray()
             );

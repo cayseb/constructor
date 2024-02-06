@@ -22,7 +22,7 @@ class SelectController extends AdminController
 
     protected function grid(): Grid
     {
-        $grid = new Grid(new \App\Models\Input());
+        $grid = new Grid(new \App\Models\Select());
         $grid->column('system_name','Название');
         $grid->column('created_at', 'Дата создания')->display(function ($date) {
             return Carbon::parse($date)->format('d-m-Y');
@@ -39,6 +39,8 @@ class SelectController extends AdminController
         $form->switch('multi','Мультиселект');
         $form->hasMany('options', 'Варианты',function (Form\NestedForm $form) {
             $form->text('name', 'Опция');
+            $form->switch('selected', 'Выбрано по умолчанию');
+            $form->switch('default','Дефолтный текст');
         });
         return $form;
     }

@@ -38,7 +38,7 @@ class InputObserver
      */
     public function deleted(Input $input): void
     {
-        //
+        $input->field->delete();
     }
 
     /**

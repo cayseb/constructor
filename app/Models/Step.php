@@ -13,7 +13,6 @@ use Spatie\EloquentSortable\SortableTrait;
 class Step extends Model
 {
     use HasFactory;
-
     use HasUuids;
 
 

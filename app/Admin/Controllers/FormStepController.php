@@ -18,8 +18,9 @@ class FormStepController extends AdminController
 {
     public function index(Content $content): Content
     {
+        $form = \App\Models\Form::findOrFail(request()->form);
         return $content
-            ->title('Шаги в форме')
+            ->title($form->name)
             ->breadcrumb(
                 [
                     'text' => 'Шаги',
@@ -39,7 +40,7 @@ class FormStepController extends AdminController
         $grid->model()->where('form_id',request()->form);
         $grid->column('step_id','Название')
             ->display(fn ():string => $this->steps->name);
-        $grid->disableCreateButton(false);
+
         return $grid;
     }
 

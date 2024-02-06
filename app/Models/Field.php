@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\FieldEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -47,13 +47,13 @@ class Field extends Model implements Sortable
         return $this->hasOne(Input::class);
     }
 
-    public function getModel()
+    public function getBelongsModel()
     {
-        return match ($this->type){
-            Input::class => Input::findOrFail($this->stepable_id),
-            Select::class => Select::findOrFail($this->stepable_id),
-            Checkbox::class => Checkbox::findOrFail($this->stepable_id),
-            Radio::class => Radio::findOrFail($this->stepable_id),
+        return match (FieldEnum::from($this->type)){
+            FieldEnum::INPUT => $this->input,
+            FieldEnum::SELECT => $this->select,
+            FieldEnum::CHECKBOX => $this->checkbox,
+            FieldEnum::RADIO => $this->radio,
         };
     }
 }

@@ -34,7 +34,7 @@ class FieldController extends AdminController
                 FieldEnum::INPUT => route('admin.inputs.index', ['field' => $this->id]),
                 FieldEnum::CHECKBOX => route('admin.checkboxes.index', ['field' => $this->id]),
                 FieldEnum::SELECT => route('admin.selects.index', ['field' => $this->id]),
-                FieldEnum::RADIO => route('admin.radio.index', ['field' => $this->id]),
+                FieldEnum::RADIO => route('admin.radios.index', ['field' => $this->id]),
             };
             return "<a href=" . $route . ">$this->name</a>";
         });

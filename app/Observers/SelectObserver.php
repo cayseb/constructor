@@ -39,7 +39,7 @@ class SelectObserver
      */
     public function deleted(Select $select): void
     {
-        //
+        $select->field->delete();
     }
 
     /**
