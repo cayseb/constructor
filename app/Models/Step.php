@@ -22,31 +22,10 @@ class Step extends Model
         return $this->belongsToMany(Form::class)->orderByPivot('order')->using(FormStep::class);
     }
 
-    public function inputs()
+    public function fields(): BelongsToMany
     {
-        return $this->morphedByMany(Input::class, 'stepable')->using(Stepable::class);
+        return $this->belongsToMany(Field::class)->orderByPivot('order')->using(FieldStep::class);
     }
-
-    public function checkboxes()
-    {
-        return $this->morphedByMany(Checkbox::class, 'stepable')->using(Stepable::class);
-    }
-
-    public function selects()
-    {
-        return $this->morphedByMany(Select::class, 'stepable')->using(Stepable::class);
-    }
-
-    public function radios()
-    {
-        return $this->morphedByMany(Radio::class, 'stepable')->using(Stepable::class);
-    }
-
-    public function stepables()
-    {
-        return $this->belongsTo(Stepable::class, 'step_id');
-    }
-
 
 
 }

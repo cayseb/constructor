@@ -17,6 +17,7 @@ Route::group([
     $router->resource('forms', \App\Admin\Controllers\FormController::class);
     $router->resource('steps', \App\Admin\Controllers\StepController::class);
     $router->resource('steps/{step}/steable', \App\Admin\Controllers\StepableController::class);
+    $router->resource('steps/{step}/fields', \App\Admin\Controllers\FieldStepController::class);
     $router->resource('form/{form}/steps', \App\Admin\Controllers\FormStepController::class,['as' => 'form']);
     $router->resource('inputs', \App\Admin\Controllers\Fields\InputController::class);
     $router->resource('radio', \App\Admin\Controllers\Fields\RadioController::class);

@@ -11,11 +11,10 @@ class WelcomeController
     public function __invoke()
     {
         $form = Form::with(
-            'steps.inputs',
-            'steps.selects.options',
-            'steps.checkboxes.options',
-            'steps.radios.options',
-            'steps.stepables'
+            'steps.fields.input',
+            'steps.fields.checkbox',
+            'steps.fields.select',
+            'steps.fields.radio',
         )->first();
         return view('welcome',compact('form'));
     }

@@ -16,9 +16,9 @@ class Checkbox extends Model
 
     protected $guarded = [];
 
-    public function steps()
+    public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->morphToMany(Step::class, 'stepable');
+        return $this->belongsTo(Field::class);
     }
 
     public function options(): MorphMany
@@ -26,8 +26,4 @@ class Checkbox extends Model
         return $this->morphMany(Option::class, 'optionable');
     }
 
-    public function stepables()
-    {
-        return $this->belongsTo(Stepable::class, 'stepable_id');
-    }
 }

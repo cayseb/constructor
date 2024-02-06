@@ -51,6 +51,7 @@ class InputController extends AdminController
         $form->text('label','Лейбл');
         $form->text('placeholder','Плейсхолдер');
         $form->switch('required','Обязательно');
+
         return $form;
     }
 

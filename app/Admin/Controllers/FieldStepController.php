@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace App\Admin\Controllers;
 
-use App\Enums\FieldEnum;
 use App\Models\Checkbox;
-use App\Models\Field;
 use App\Models\Input;
-use App\Models\Radio;
-use App\Models\Select;
 use App\Models\Step;
 use Carbon\Carbon;
 use Encore\Admin\Controllers\AdminController;
@@ -17,7 +13,8 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 
-class StepController extends AdminController
+
+class FieldStepController extends AdminController
 {
     public function index(Content $content): Content
     {
@@ -32,9 +29,16 @@ class StepController extends AdminController
 
     protected function grid(): Grid
     {
-        $grid = new Grid(new \App\Models\Step());
-        $grid->column('name','Название')->display(function (){
-            return "<a href=" . route('admin.steable.index', ['step' => $this->id]) . ">$this->name</a>";
+        $grid = new Grid(new \App\Models\Stepable());
+        $grid->sortable();
+        $grid->actions(function ($action) {
+            $action->disableEdit();
+            $action->disableView();
+            $action->disableDelete();
+        });
+        $grid->model()->where('step_id',request()->step);
+        $grid->column('stepable_id','Название')->display(function (){
+            return $this->getModel()->system_name;
         });
         $grid->column('created_at', 'Дата создания')->display(function ($date) {
             return Carbon::parse($date)->format('d-m-Y');
@@ -47,21 +51,8 @@ class StepController extends AdminController
     {
         $form = new Form(new Step());
         $form->text('name','Название');
-        $form->multipleSelect('fields','Инпуты')
-            ->options(Field::whereType(FieldEnum::INPUT->value)->pluck('name','id')->toArray()
-            );
-        $form->multipleSelect('fields','Чекбоксы')
-            ->options(Field::whereType(FieldEnum::CHECKBOX->value)->pluck('name','id')->toArray()
-            );
-        $form->multipleSelect('fields','Селекты')
-            ->options(Field::whereType(FieldEnum::SELECT->value)->pluck('name','id')->toArray()
-            );
-        $form->multipleSelect('fields','Радио')
-            ->options(Field::whereType(FieldEnum::RADIO->value)->pluck('name','id')->toArray()
-            );
-//        $form->multipleSelect('checkboxes','Чекбоксы')->options(Checkbox::pluck('system_name','id')->toArray());
-//        $form->multipleSelect('selects','Селекты')->options(Select::pluck('system_name','id')->toArray());
-//        $form->multipleSelect('radios','Радио')->options(Radio::pluck('system_name','id')->toArray());
+        $form->multipleSelect('inputs','inputs')->options(Input::pluck('system_name','id')->toArray());
+        $form->multipleSelect('checkboxes','inputs')->options(Checkbox::pluck('system_name','id')->toArray());
         return $form;
     }
 

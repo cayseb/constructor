@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Checkbox;
+use App\Models\Input;
+use App\Models\Radio;
+use App\Models\Select;
+use App\Observers\CheckboxObserver;
+use App\Observers\InputObserver;
+use App\Observers\RadioObserver;
+use App\Observers\SelectObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,7 +33,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Input::observe(InputObserver::class);
+        Checkbox::observe(CheckboxObserver::class);
+        Select::observe(SelectObserver::class);
+        Radio::observe(RadioObserver::class);
     }
 
     /**

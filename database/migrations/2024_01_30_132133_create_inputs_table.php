@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('label')->nullable();
             $table->string('placeholder')->nullable();
             $table->boolean('required')->default(false);
+            $table->foreignUuid('field_id')
+                ->references('id')
+                ->on('fields')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

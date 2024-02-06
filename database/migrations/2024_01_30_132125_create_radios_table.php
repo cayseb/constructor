@@ -15,6 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('system_name');
             $table->string('name');
+            $table->foreignUuid('field_id')
+                ->references('id')
+                ->on('fields')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

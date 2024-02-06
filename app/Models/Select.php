@@ -18,4 +18,9 @@ class Select extends Model
     {
         return $this->morphMany(Option::class, 'optionable');
     }
+
+    public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class);
+    }
 }
